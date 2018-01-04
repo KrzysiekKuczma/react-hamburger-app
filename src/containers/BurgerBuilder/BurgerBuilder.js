@@ -44,24 +44,12 @@ class BurgerBuilder extends Component {
     }
     continuePurchaseHandler = () => {
         this.setState({loading: true});
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Chris Kuczma',
-                adress: {
-                    street: 'Somestreet 1',
-                    zipCode: '78-150',
-                    country: 'Poland'
-                },
-                email: 'wrong@turn.com',
-            },
-            deliveryMethod: 'fastest'
-        }
+
         const queryParams = [];
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
+
         queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
         this.props.history.push({
