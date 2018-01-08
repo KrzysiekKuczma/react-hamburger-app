@@ -4,6 +4,7 @@ import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.css';
 import Input from '../../../components/UI/Input/Input';
+import { connect } from 'react-redux';
 
 class ContactData extends Component {
     state = {
@@ -105,6 +106,14 @@ class ContactData extends Component {
         if (rules.minLength) {
             isValid = value.length >= rules.minLength && isValid;
         }
+        if (rules.isEmail) {
+            const pattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            isValid = pattern.test(value) && isValid;
+        }
+        if (rules.isNumeric) {
+            const pattern = /^\d+$/;
+            isValid = pattern.test(value) && isValid;
+        }
         return isValid;
     } 
 
@@ -116,7 +125,7 @@ class ContactData extends Component {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
         }  
@@ -183,4 +192,10 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapeStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice,
+    }
+}
+export default connect(mapeStateToProps)(ContactData);
