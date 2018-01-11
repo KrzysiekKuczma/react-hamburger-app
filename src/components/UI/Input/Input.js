@@ -42,8 +42,8 @@ const input = (props) => {
                 {props.elementConfig.options.map(opt => (
                     <option key={opt.value} value={opt.value}>{opt.displayValue}</option>
                 ))}
-                </select>
-            );
+                
+            </select>);
             break;
 
         default: 
@@ -54,8 +54,6 @@ const input = (props) => {
                  onChange={props.changed}
             />
     }
-    
-    console.log(props)
     return (
         <div className={classes.Input}>
             <label className={classes.Label}></label>

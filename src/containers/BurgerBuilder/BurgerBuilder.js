@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import axios from '../../axios-orders';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
+
 import Aux from '../../hoc/Aux/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions';
 
 class BurgerBuilder extends Component {
     constructor(props){
@@ -20,13 +21,7 @@ class BurgerBuilder extends Component {
         }
     }
     componentDidMount() {
-        axios.get('https://react-burger-app-7c482.firebaseio.com/ingredients.json')
-        .then(response => {
-            this.setState({ingredients: response.data})
-        })
-        .catch(error => {
-            this.setState({error: error}); 
-        });
+        this.props.onInitIngredients();
     }
     purchaseHandler = () => {
         this.setState({purchasing: true})
@@ -35,6 +30,7 @@ class BurgerBuilder extends Component {
         this.setState({purchasing: false})
     }
     continuePurchaseHandler = () => {
+        this.props.onInitPurchase();
         this.setState({loading: true});
 
         const queryParams = [];
@@ -67,7 +63,7 @@ class BurgerBuilder extends Component {
             disabledItem[key] = disabledItem[key] <= 0;
         }
         let orderSummary = null;
-        let burger = this.state.error ? <p>{this.state.error.message}</p> : <Spinner />
+        let burger = this.props.error ? <p>{this.props.error.message}</p> : <Spinner />
         if (this.props.ings) {
             burger = (
                 <Aux>
@@ -105,14 +101,18 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice,
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        error: state.burgerBuilder.error,
+        purchased: state.order.purchased
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
-        onIngredientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName}),
+        onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
+        onInitIngredients: () => dispatch(actions.initIngredients()),
+        onInitPurchase: () => dispatch(actions.purchaseInit()),
     };
 };
 

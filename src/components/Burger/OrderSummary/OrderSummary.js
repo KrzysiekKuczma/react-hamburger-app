@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Aux from  '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
 
-class orderSummary extends Component {
+class OrderSummary extends Component {
     render() {
         const ingredientSummary = Object.keys(this.props.ingredients)
             .map(igKey => {
@@ -26,4 +26,4 @@ class orderSummary extends Component {
     }
 };
 
-export default orderSummary;
+export default OrderSummary;
