@@ -67,6 +67,19 @@ class ContactData extends Component {
                 valid: false,
                 touched: false,
             },
+            card: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Card Number'
+                },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false,
+            },
             email: {
                 elementType: 'input',
                 elementConfig: {
@@ -130,7 +143,7 @@ class ContactData extends Component {
             price: this.props.price,
             orderData: formData
         }  
-        this.props.onOrderBurger(order);
+        this.props.onOrderBurger(order, this.props.token);
     }
     inputChangeHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {...this.state.orderForm}
@@ -187,7 +200,7 @@ class ContactData extends Component {
 }
 const mapDispatchToProps = dispatch => {
     return{
-        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
     }
 }
 const mapeStateToProps = state => {
@@ -195,6 +208,7 @@ const mapeStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading,
+        token: state.auth.token,
     }
 }
 export default connect(mapeStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

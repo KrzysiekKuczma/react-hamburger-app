@@ -7,7 +7,16 @@
     padding: 10px;
     box-sizing: border-box;
 }
-
+.ErrorMessage {
+    margin: 0 auto;
+    width: 250px;
+    padding: 2px;
+    font-weight: bold;
+    background-color: #c50027;
+    text-transform: initial;
+    color: #ffffff;
+    box-sizing: border-box
+}
 @media (min-width: 600px) {
     .Auth {
         width: 500px;
