@@ -174,16 +174,15 @@ module.exports = {
                     loader: require.resolve('style-loader'),
                     options: {
                       hmr: false,
-                      modules: true,
-                      localIdentName: '[name__[local]__[hash:base64:5]',
                     },
                   },
                   use: [
                     {
                       loader: require.resolve('css-loader'),
                       options: {
-                        importLoaders: 1,
                         minimize: true,
+                        modules: true,
+                        localIdentName: '[name]__[local]___[hash:base64:5]',
                         sourceMap: shouldUseSourceMap,
                       },
                     },
@@ -224,7 +223,7 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            exclude: [/\.js$/, /\.html$/, /\.json$/, /\.css$/,],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
@@ -287,7 +286,7 @@ module.exports = {
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
-      filename: cssFilename,
+      filename: cssFilename, allChunks: true,
     }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without

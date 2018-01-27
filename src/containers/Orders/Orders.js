@@ -6,8 +6,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 
-// import classes from './Orders.css';
-
 class Orders extends Component {
 
     componentDidMount() {

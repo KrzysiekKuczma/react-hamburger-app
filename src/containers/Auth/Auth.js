@@ -7,7 +7,7 @@ import { updateObject, checkValidity } from '../../shared/utility';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import classes from './Auth.css';
+import styles from './Auth.css';
 
 class Auth extends Component {
     state = {
@@ -98,14 +98,14 @@ class Auth extends Component {
         let errorMessage = null;
         if (this.props.error) {
             const message = this.props.error.message.split('_').join(' ')
-            errorMessage = <p className={classes.ErrorMessage}>{message}</p>
+            errorMessage = <p className={styles.ErrorMessage}>{message}</p>
         }
         let authRedirect = null;
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
         return (
-            <div className={classes.Auth}>
+            <div className={styles.Auth}>
                 {authRedirect}
                 <form onSubmit={this.submitHandler}>
                     {form}

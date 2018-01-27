@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Order.css';
+import styles from './Order.css';
 
 const order = (props) => {
     const ingredients = [];
@@ -11,11 +11,11 @@ const order = (props) => {
         });
     }
     const ingredientsOutput = ingredients.map(ingredient => {
-        return <span key={ingredient.name} className={classes.Ingredient} >{ingredient.name} ({ingredient.amount})</span>
+        return <span key={ingredient.name} className={styles.Ingredient} >{ingredient.name} ({ingredient.amount})</span>
     });
 
     return (
-        <div className={classes.Order}>
+        <div className={styles.Order}>
             <p>Ingredients: {ingredientsOutput}</p>
             <p>Price: <strong>{Number.parseFloat(props.price).toFixed(2)}$</strong></p>
         </div>

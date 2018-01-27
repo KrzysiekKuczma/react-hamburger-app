@@ -1,10 +1,10 @@
 import React from 'react';
-import classes from './Backdrop.css';
+import styles from './Backdrop.css';
 
 const backdrop = (props) => {
     if (props.show){
         return <div 
-            className={classes.Backdrop}
+            className={styles.Backdrop}
             onClick={props.clicked}
         ></div> 
     } else{

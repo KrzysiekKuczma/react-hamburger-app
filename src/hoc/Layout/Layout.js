@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Aux from '../Aux/Aux';
-import classes from './Layout.css';
+import styles from './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/SideDrawer/SideDrawer';
 import { connect } from 'react-redux';
@@ -27,7 +27,7 @@ class Layout extends Component {
                 open={this.state.showSideDrawer}
                 close={this.sideDrawerClosedHandler}
             />
-            <main className={classes.content}>{this.props.children}</main>
+            <main className={styles.content}>{this.props.children}</main>
         </Aux>
     }
 };

@@ -1,22 +1,22 @@
 import React from 'react'
 
-import classes from './Input.css';
+import styles from './Input.css';
 
 const input = (props) => {
     let inputElement = null;
-    const inputClasses = [classes.InputElement];
+    const inputStyles = [styles.InputElement];
     if (props.invalid && props.shouldValidate && props.touched) {
-        inputClasses.push(classes.Invalid)
+        inputStyles.push(styles.Invalid)
     }
 
     let validationError = null;
     if (props.invalid && props.touched) {
-        validationError = <p className={classes.ErrorMessage}>Please give correct {props.elementConfig.placeholder}</p>
+        validationError = <p className={styles.ErrorMessage}>Please give correct {props.elementConfig.placeholder}</p>
     }
     switch (props.elementType) {
         case ( 'input' ):
         inputElement = <input 
-                className={inputClasses.join(' ')} 
+                className={inputStyles.join(' ')} 
                 {...props.elementConfig}  
                 value={props.value}
                 onChange={props.changed}
@@ -25,7 +25,7 @@ const input = (props) => {
 
         case ( 'textarea' ):
             inputElement = <textarea 
-                className={inputClasses.join(' ')} 
+                className={inputStyles.join(' ')} 
                 {...props.elementConfig}  
                 value={props.value}
                 onChange={props.changed}
@@ -35,7 +35,7 @@ const input = (props) => {
         case ( 'select' ):
             inputElement = (
             <select
-                className={inputClasses.join(' ')} 
+                className={inputStyles.join(' ')} 
                 {...props.elementConfig}  
                 value={props.value}
                 onChange={props.changed}>
@@ -48,15 +48,15 @@ const input = (props) => {
 
         default: 
             inputElement = <input 
-                className={inputClasses.join(' ')}
+                className={inputStyles.join(' ')}
                 {...props.elementConfig} 
                  value={props.value}
                  onChange={props.changed}
             />
     }
     return (
-        <div className={classes.Input}>
-            <label className={classes.Label}></label>
+        <div className={styles.Input}>
+            <label className={styles.Label}></label>
             {inputElement}
             {validationError}
         </div>

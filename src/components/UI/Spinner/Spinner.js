@@ -1,10 +1,10 @@
 import React from 'react';
-import classes from './Spinner.css';
+import styles from './Spinner.css';
 
 const spinner = () => (
-    <div className={classes.Spinner}>
-        <div className={classes.Dot1}></div>
-        <div className={classes.Dot2}></div>
+    <div className={styles.Spinner}>
+        <div className={styles.Dot1}></div>
+        <div className={styles.Dot2}></div>
     </div>
 );
 
